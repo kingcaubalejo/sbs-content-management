@@ -1,0 +1,7 @@
+<mat-nav-list>
+    @for (item of sidebarItems; track $index) {
+    <app-menu-item [item]="item" />
+    } @empty {
+    <span>No Routes Found</span>
+    }
+</mat-nav-list>

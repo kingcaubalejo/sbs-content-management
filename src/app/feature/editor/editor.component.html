@@ -1,0 +1,71 @@
+<div class="editor-container">
+  <div class="dashboard-header">
+    <h1>Content Editor</h1>
+    <p>Create and edit spiritual content</p>
+  </div>
+
+  <div class="editor-toolbar glass-card">
+    <div class="toolbar-content">
+      <span class="toolbar-title">Editor Mode</span>
+      <mat-button-toggle-group [(ngModel)]="mode" name="editorMode" class="mode-toggle">
+        <mat-button-toggle value="markdown">
+          <mat-icon>description</mat-icon>
+          Markdown
+        </mat-button-toggle>
+        <mat-button-toggle value="html">
+          <mat-icon>code</mat-icon>
+          HTML
+        </mat-button-toggle>
+      </mat-button-toggle-group>
+    </div>
+  </div>
+
+  <div class="editor-content">
+    <div class="editor-grid">
+      <!-- Editor Panel -->
+      <div class="editor-panel glass-card">
+        <div class="panel-header">
+          <mat-icon>edit</mat-icon>
+          <h3>Editor</h3>
+        </div>
+        <div class="panel-content">
+          <textarea
+            [(ngModel)]="content"
+            class="editor-textarea"
+            [placeholder]="mode === 'markdown' ? 'Write your markdown here...' : 'Write your HTML here...'"
+          ></textarea>
+        </div>
+      </div>
+
+      <!-- Mobile Preview Panel -->
+      <div class="preview-panel glass-card">
+        <div class="panel-header">
+          <mat-icon>smartphone</mat-icon>
+          <h3>Mobile Preview</h3>
+        </div>
+        <div class="panel-content mobile-preview-container">
+          <!-- Mobile Device Frame -->
+          <div class="mobile-frame">
+            <!-- Mobile Top Bar -->
+            <div class="mobile-status-bar">
+              <span class="status-time">9:41</span>
+              <div class="status-icons">
+                <mat-icon class="status-icon">signal_cellular_alt</mat-icon>
+                <mat-icon class="status-icon">wifi</mat-icon>
+                <mat-icon class="status-icon">battery_full</mat-icon>
+              </div>
+            </div>
+
+            <!-- Mobile Screen -->
+            <div class="mobile-screen">
+              <div class="preview-content" [innerHTML]="preview"></div>
+            </div>
+
+            <!-- Mobile Home Indicator -->
+            <div class="mobile-home-indicator"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

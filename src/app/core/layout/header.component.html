@@ -1,0 +1,76 @@
+<header class="modern-header">
+  <div class="header-container">
+    <!-- Left Section -->
+    <div class="header-left">
+      <button mat-icon-button class="menu-toggle" (click)="onHamburgerClick()">
+        <mat-icon>menu</mat-icon>
+      </button>
+      
+      <div class="brand">
+        <div class="brand-icon">
+          <mat-icon class="brand-logo">auto_stories</mat-icon>
+        </div>
+        <div class="brand-text">
+          <h1 class="brand-title">SBS</h1>
+          <span class="brand-subtitle">Content Management</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Center Section -->
+    <div class="header-center">
+      <div class="search-container">
+        <mat-icon class="search-icon">search</mat-icon>
+        <input type="text" placeholder="Search books, volumes..." class="search-input">
+        <button mat-icon-button class="search-filter">
+          <mat-icon>tune</mat-icon>
+        </button>
+      </div>
+    </div>
+
+    <!-- Right Section -->
+    <div class="header-right">
+      <button mat-icon-button class="action-btn" (click)="toggleTheme()" title="Toggle Theme">
+        <mat-icon>{{ isDarkTheme() ? 'light_mode' : 'dark_mode' }}</mat-icon>
+      </button>
+      
+      <button mat-icon-button class="action-btn notification-btn" (click)="onNotificationClick()" title="Notifications" [matBadge]="notificationCount()" [matBadgeHidden]="notificationCount() === 0" matBadgeColor="accent">
+        <mat-icon>notifications_none</mat-icon>
+      </button>
+      
+      <div class="profile-section">
+        <button mat-button [matMenuTriggerFor]="profileMenu" class="profile-trigger">
+          <div class="profile-avatar">
+            <mat-icon>person</mat-icon>
+          </div>
+          <div class="profile-info">
+            <span class="profile-name">{{ currentUser().name }}</span>
+            <span class="profile-role">Administrator</span>
+          </div>
+          <mat-icon class="dropdown-icon">keyboard_arrow_down</mat-icon>
+        </button>
+        
+        <mat-menu #profileMenu="matMenu" class="profile-menu" xPosition="before" yPosition="below">
+          <div class="menu-header">
+            <div class="menu-avatar">
+              <mat-icon>person</mat-icon>
+            </div>
+            <div class="menu-user-info">
+              <div class="menu-name">{{ currentUser().name }}</div>
+              <div class="menu-email">{{ currentUser().email }}</div>
+            </div>
+          </div>
+          <mat-divider></mat-divider>
+          <button mat-menu-item (click)="onSettings()">
+            <mat-icon>settings</mat-icon>
+            <span>Settings</span>
+          </button>
+          <button mat-menu-item (click)="onLogout()">
+            <mat-icon>logout</mat-icon>
+            <span>Sign Out</span>
+          </button>
+        </mat-menu>
+      </div>
+    </div>
+  </div>
+</header>

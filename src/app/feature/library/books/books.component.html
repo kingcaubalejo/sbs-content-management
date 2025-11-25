@@ -1,0 +1,90 @@
+<div class="books-container">
+  <!-- Search and Filter Section -->
+  <div class="filter-section">
+    <mat-form-field appearance="outline" class="search-field">
+      <mat-label>Search Books</mat-label>
+      <input matInput [(ngModel)]="searchTerm" (ngModelChange)="onSearchChange()" placeholder="Search by title or book number">
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="volume-filter">
+      <mat-label>Filter by Volume</mat-label>
+      <mat-select [(ngModel)]="selectedVolume" (ngModelChange)="onVolumeChange()">
+        <mat-option value="">All Volumes</mat-option>
+        <mat-option *ngFor="let volume of volumes" [value]="volume">
+          {{ volume }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <button mat-raised-button (click)="clearFilters()" class="clear-btn">
+      <mat-icon>clear</mat-icon>
+      Clear Filters
+    </button>
+  </div>
+
+  <!-- Tree View Section -->
+  <div class="tree-container">
+    <mat-tree [dataSource]="dataSource" [treeControl]="treeControl" class="books-tree">
+      <!-- Leaf node -->
+      <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding [class]="node.type === 'book' ? 'book-node' : 'volume-node'">
+        <div class="node-content">
+          <button mat-icon-button disabled></button>
+          <mat-icon [class]="node.type === 'book' ? 'book-icon' : 'volume-icon'">
+            {{ node.type === 'book' ? 'book' : 'folder' }}
+          </mat-icon>
+          <span class="node-label">{{ node.name }}</span>
+          <div class="node-actions" *ngIf="node.type === 'book'">
+            <button mat-icon-button color="primary" (click)="updateBook(node)" title="Update">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button color="warn" (click)="deleteBook(node)" title="Delete">
+              <mat-icon>delete</mat-icon>
+            </button>
+            <button mat-icon-button color="accent" (click)="viewBook(node)" title="View">
+              <mat-icon>visibility</mat-icon>
+            </button>
+          </div>
+        </div>
+      </mat-tree-node>
+
+      <!-- Expandable node -->
+      <mat-tree-node *matTreeNodeDef="let node; when: hasChild" matTreeNodePadding class="volume-node">
+        <div class="node-content">
+          <button mat-icon-button matTreeNodeToggle [attr.aria-label]="'Toggle ' + node.name">
+            <mat-icon class="mat-icon-rtl-mirror">
+              {{ treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right' }}
+            </mat-icon>
+          </button>
+          <mat-icon class="volume-icon">folder</mat-icon>
+          <span class="node-label">{{ node.name }}</span>
+          <div class="book-pagination" *ngIf="node.totalBookPages && node.totalBookPages > 1">
+            <button mat-icon-button (click)="previousBookPage(node.name)" [disabled]="node.currentBookPage === 0" class="page-btn">
+              <mat-icon>chevron_left</mat-icon>
+            </button>
+            <span class="book-page-info">{{ (node.currentBookPage || 0) + 1 }}/{{ node.totalBookPages }}</span>
+            <button mat-icon-button (click)="nextBookPage(node.name)" [disabled]="node.currentBookPage === (node.totalBookPages || 1) - 1" class="page-btn">
+              <mat-icon>chevron_right</mat-icon>
+            </button>
+          </div>
+        </div>
+      </mat-tree-node>
+    </mat-tree>
+  </div>
+
+  <!-- Pagination Controls -->
+  <div class="pagination-container" *ngIf="totalPages > 1">
+    <button mat-icon-button (click)="previousPage()" [disabled]="currentPage === 0">
+      <mat-icon>chevron_left</mat-icon>
+    </button>
+    <span class="page-info">{{ currentPage + 1 }} of {{ totalPages }}</span>
+    <button mat-icon-button (click)="nextPage()" [disabled]="currentPage === totalPages - 1">
+      <mat-icon>chevron_right</mat-icon>
+    </button>
+  </div>
+
+  <!-- Floating Action Button -->
+  <button mat-fab class="add-book-fab" (click)="openAddBookModal()">
+    <mat-icon>add</mat-icon>
+  </button>
+</div>

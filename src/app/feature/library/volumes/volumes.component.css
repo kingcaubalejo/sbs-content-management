@@ -1,0 +1,73 @@
+.volumes-container {
+  padding: 24px;
+  position: relative;
+}
+
+.table-container {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  overflow: hidden;
+}
+
+.volumes-table {
+  width: 100%;
+}
+
+::ng-deep .mat-mdc-header-cell {
+  background-color: #8b4513 !important;
+  color: white !important;
+  font-weight: 600 !important;
+}
+
+::ng-deep .mat-mdc-header-row {
+  background-color: #8b4513 !important;
+}
+
+.mat-mdc-row:hover {
+  background-color: #f7f3e9;
+}
+
+.add-volume-fab {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: #8b4513 !important;
+  color: white !important;
+  z-index: 1000;
+}
+
+.add-volume-fab:hover {
+  background: #6b3410 !important;
+}
+
+/* Modal Styles */
+::ng-deep .mat-mdc-dialog-title {
+  color: #3c2415 !important;
+  font-weight: 600 !important;
+}
+
+::ng-deep .mat-mdc-raised-button.mat-primary {
+  background-color: #8b4513 !important;
+}
+
+::ng-deep .mat-mdc-outlined-text-field:not(.mdc-text-field--disabled).mdc-text-field--focused .mdc-notched-outline__leading,
+::ng-deep .mat-mdc-outlined-text-field:not(.mdc-text-field--disabled).mdc-text-field--focused .mdc-notched-outline__notch,
+::ng-deep .mat-mdc-outlined-text-field:not(.mdc-text-field--disabled).mdc-text-field--focused .mdc-notched-outline__trailing {
+  border-color: #8b4513 !important;
+}
+
+::ng-deep .mat-mdc-form-field-focus-overlay {
+  background-color: #8b4513 !important;
+}
+
+@media (max-width: 768px) {
+  .volumes-container {
+    padding: 16px;
+  }
+  
+  .add-volume-fab {
+    bottom: 16px;
+    right: 16px;
+  }
+}

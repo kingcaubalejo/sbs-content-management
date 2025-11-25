@@ -1,0 +1,23 @@
+.dashboard-container {
+    padding: 32px;
+    padding-bottom: 100px;
+    background: #fafafa;
+    min-height: 100vh;
+  }
+  
+  .dashboard-header {
+    margin-bottom: 32px;
+  }
+  
+  .dashboard-header h1 {
+    font-size: 32px;
+    font-weight: 600;
+    color: #3c2415;
+    margin: 0 0 8px 0;
+  }
+  
+  .dashboard-header p {
+    font-size: 16px;
+    color: #6b3410;
+    margin: 0;
+  }

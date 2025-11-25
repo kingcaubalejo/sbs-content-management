@@ -1,0 +1,90 @@
+<div class="dashboard-container">
+  <div class="dashboard-header">
+    <h1>Dashboard</h1>
+    <p>Welcome to Spiritual Building Stones CMS</p>
+  </div>
+
+  <div class="stats-grid">
+    @for (stat of dashboardStats; track stat.title) {
+      <mat-card class="stat-card">
+        <mat-card-content>
+          <div class="stat-content">
+            <div class="stat-icon" [style.background-color]="stat.color">
+              <mat-icon>{{ stat.icon }}</mat-icon>
+            </div>
+            <div class="stat-info">
+              <h2>{{ stat.count | number }}</h2>
+              <p>{{ stat.title }}</p>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    }
+  </div>
+
+  <div class="charts-section">
+    <div class="charts-grid">
+      <mat-card class="chart-card">
+        <mat-card-header>
+          <mat-card-title>Monthly Downloads</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="bar-chart">
+            @for (value of monthlyData; track $index) {
+              <div class="bar" [style.height.%]="(value / 500) * 100">
+                <span class="bar-value">{{ value }}</span>
+              </div>
+            }
+          </div>
+          <div class="chart-labels">
+            <span>Jan</span><span>Feb</span><span>Mar</span><span>Apr</span>
+            <span>May</span><span>Jun</span><span>Jul</span><span>Aug</span>
+            <span>Sep</span><span>Oct</span><span>Nov</span><span>Dec</span>
+          </div>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card class="chart-card">
+        <mat-card-header>
+          <mat-card-title>Global Distribution</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="pie-chart"></div>
+          <div class="pie-legend">
+            @for (region of worldRegions; track region.name) {
+              <div class="legend-item">
+                <div class="legend-color" [style.background-color]="region.color"></div>
+                <span>{{ region.name }} ({{ region.users | number }})</span>
+              </div>
+            }
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+
+  <div class="floating-actions">
+    <div class="fab-container" [class.active]="fabOpen" (click)="toggleFab()">
+      <button mat-fab class="main-fab">
+        <mat-icon>{{ fabOpen ? 'close' : 'add' }}</mat-icon>
+      </button>
+      <div class="fab-menu">
+        <button mat-mini-fab class="mini-fab" title="Add Volume">
+          <mat-icon>library_books</mat-icon>
+        </button>
+        <button mat-mini-fab class="mini-fab" title="Add Book">
+          <mat-icon>book</mat-icon>
+        </button>
+        <button mat-mini-fab class="mini-fab" title="Add Language">
+          <mat-icon>language</mat-icon>
+        </button>
+        <button mat-mini-fab class="mini-fab" title="Add User">
+          <mat-icon>person_add</mat-icon>
+        </button>
+        <button mat-mini-fab class="mini-fab" title="Settings">
+          <mat-icon>settings</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

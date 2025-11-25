@@ -1,0 +1,48 @@
+::ng-deep .mat-drawer {
+  background: rgba(255, 255, 255, 0.9) !important;
+  backdrop-filter: blur(20px) !important;
+  transition: transform 400ms cubic-bezier(0.25, 0.8, 0.25, 1) !important;
+}
+
+::ng-deep .mat-drawer-container {
+  transition: margin 400ms cubic-bezier(0.25, 0.8, 0.25, 1) !important;
+}
+
+::ng-deep .mat-drawer-backdrop {
+  transition: opacity 400ms cubic-bezier(0.25, 0.8, 0.25, 1) !important;
+}
+
+::ng-deep .mat-nav-list {
+  padding: 16px !important;
+}
+
+::ng-deep .mat-mdc-list-item {
+  border-radius: 12px !important;
+  margin-bottom: 8px !important;
+  background: rgba(247, 243, 233, 0.6) !important;
+  backdrop-filter: blur(10px) !important;
+  transition: all 0.3s ease !important;
+}
+
+::ng-deep .mat-mdc-list-item:hover {
+  background: rgba(247, 243, 233, 0.9) !important;
+  transform: translateX(4px) !important;
+  box-shadow: 0 4px 12px rgba(139, 69, 19, 0.1) !important;
+}
+
+::ng-deep .mat-mdc-list-item.active {
+  background: rgba(139, 69, 19, 0.1) !important;
+}
+
+/* Dark theme */
+.dark-theme ::ng-deep .mat-drawer {
+  background: rgba(28, 28, 30, 0.9) !important;
+}
+
+.dark-theme ::ng-deep .mat-mdc-list-item {
+  background: rgba(44, 44, 46, 0.6) !important;
+}
+
+.dark-theme ::ng-deep .mat-mdc-list-item:hover {
+  background: rgba(44, 44, 46, 0.9) !important;
+}
