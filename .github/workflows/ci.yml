@@ -1,0 +1,39 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+    
+    - name: Install dependencies
+      run: npm ci
+    
+    - name: Build application
+      run: npm run build
+    
+    - name: Run tests
+      run: npm test -- --watch=false --browsers=ChromeHeadless
+    
+    - name: Build Docker image
+      run: docker build -t sbs-cms:${{ github.sha }} .
+    
+    - name: Run Docker container test
+      run: |
+        docker run -d -p 8080:80 --name sbs-cms-test sbs-cms:${{ github.sha }}
+        sleep 10
+        curl -f http://localhost:8080 || exit 1
+        docker stop sbs-cms-test
