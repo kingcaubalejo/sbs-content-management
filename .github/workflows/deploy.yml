@@ -1,0 +1,88 @@
+name: CD - SBS Deployment
+
+run-name: Deploy to `${{ inputs.environment }}` environment from `${{ inputs.branch }}` branch
+
+on:
+    workflow_dispatch:
+        inputs:
+            branch:
+                description: 'Branch to deploy'
+                required: true
+                default: 'develop'
+                type: string
+            environment:
+                description: 'Select environment for deployment'
+                required: true
+                default: 'dev'
+                type: choice
+                options:
+                    - dev
+                    - qa
+                    - staging
+                    - prod
+env:
+    AWS_REGION: 'ap-southeast-2'
+    AWS_IAM_ASSUME_ROLE: ${{ secrets.AWS_IAM_ASSUME_ROLE }}
+    NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+permissions:
+    id-token: write
+    contents: read
+
+jobs:
+    deployment:
+        name: Hub Deployment
+        runs-on: ubuntu-latest
+        steps:
+            - name: Git clone the repository
+              uses: actions/checkout@v4
+              with:
+                  ref: ${{ github.event.inputs.branch }}
+
+            - name: Configure AWS credentials
+              uses: aws-actions/configure-aws-credentials@v4
+              with:
+                  aws-region: ${{ env.AWS_REGION }}
+                  role-to-assume: ${{ env.AWS_IAM_ASSUME_ROLE }}
+                  role-session-name: ${{ github.event.repository.name }}-hub-deployer
+
+            - name: Setup Node
+              uses: actions/setup-node@v4
+              with:
+                  node-version: '20'
+
+            - name: Install Dependencies & Build
+              id: dependencies
+              run: |
+                  printf "//registry.npmjs.org/:_authToken=\x24{NPM_TOKEN}" > .npmrc
+                  npm install --force
+
+            - name: Deploy to ${{ github.event.inputs.environment }} from ${{ github.event.inputs.branch }}
+              run: |
+                  echo "Deploying branch ${{ github.event.inputs.branch }} to ${{ github.event.inputs.environment }} environment"
+
+                  if [ "${{ github.event.inputs.environment }}" == "dev" ]; then
+                    npm run build-dev
+                    echo "Running script for dev environment..."
+                    chmod +x ./Scripts/copyToDEV.sh
+                    ./Scripts/copyToDEV.sh
+                  elif [ "${{ github.event.inputs.environment }}" == "qa" ]; then
+                    npm run build-hc1
+                    echo "Running script for hc1 environment..."
+                    chmod +x ./Scripts/copyToHC1.sh
+                    ./Scripts/copyToHC1.sh
+                  elif [ "${{ github.event.inputs.environment }}" == "staging" ]; then
+                    npm run build-uat
+                    echo "Running script for uat environment..."
+                    chmod +x ./Scripts/copyToUAT.sh
+                    ./Scripts/copyToUAT.sh
+                  elif [ "${{ github.event.inputs.environment }}" == "prod" ]; then
+                    npm run build-pra
+                    echo "Running script for prod environment..."
+                    chmod +x ./Scripts/copyToPROD.sh
+                    ./Scripts/copyToPROD.sh
+                  else
+                    echo "Unknown environment: ${{ github.event.inputs.environment }}"
+                  fi
+
+                  echo "Deployment to ${{ github.event.inputs.environment }} environment has been completed!"
