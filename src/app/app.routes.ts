@@ -22,11 +22,6 @@ export const routes: Routes = [
                 loadComponent: () => import('./feature/library/library.component').then(c => c.LibraryComponent),
                 children: [
                     {
-                        path: '',
-                        redirectTo: 'volumes',
-                        pathMatch: 'full'
-                    },
-                    {
                         path: 'volumes',
                         loadComponent: () => import('./feature/library/volumes/volumes.component').then(c => c.VolumesComponent),
                     },

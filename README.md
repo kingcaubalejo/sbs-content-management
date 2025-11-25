@@ -1,59 +1,173 @@
-# SbsCms
+# 📚 SBS CMS - Spiritual Building Stones Content Management System
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.0.2.
+A modern, glassmorphism-styled Angular CMS for managing spiritual content with an integrated mobile-first editor.
 
-## Development server
+![Angular](https://img.shields.io/badge/Angular-18-red?logo=angular)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue?logo=typescript)
+![Material Design](https://img.shields.io/badge/Material_Design-3-green?logo=material-design)
+![Docker](https://img.shields.io/badge/Docker-Ready-blue?logo=docker)
 
-To start a local development server, run:
+## ✨ Features
+
+- 🎨 **Glassmorphism UI** - Modern, translucent design with backdrop blur effects
+- 📱 **Mobile-First Editor** - Real-time mobile preview with device frame simulation
+- 📖 **Content Management** - Organize volumes, books, and languages hierarchically
+- 👥 **User Management** - Role-based access control (Admin, Editor, Viewer)
+- 🌍 **Multi-Language Support** - Built-in language management system
+- 📊 **Analytics Dashboard** - Visual insights with charts and statistics
+- 🔄 **Real-Time Preview** - Live markdown/HTML rendering in mobile viewport
+- 🚀 **Docker Ready** - Containerized deployment with Nginx
+
+## 🏗️ Architecture
+
+```
+src/
+├── app/
+│   ├── core/           # Authentication, layout, navigation
+│   ├── feature/        # Main application features
+│   │   ├── home/       # Dashboard with analytics
+│   │   ├── editor/     # SBS Studio content editor
+│   │   ├── library/    # Volume, book, language management
+│   │   └── user/       # User management system
+│   └── shared/         # Reusable components and models
+```
+
+## 🚀 Quick Start
+
+### Prerequisites
+- Node.js 18+
+- Angular CLI 18+
+- Docker (optional)
+
+### Installation
 
 ```bash
+# Clone the repository
+git clone <repository-url>
+cd sbs-cms
+
+# Install dependencies
+npm install
+
+# Start development server
 ng serve
+
+# Open browser
+open http://localhost:4200
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+### Docker Deployment
 
 ```bash
-ng generate component component-name
+# Build and run with Docker
+docker build -t sbs-cms .
+docker run -p 80:80 sbs-cms
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## 🎯 Key Components
 
+### 📊 Dashboard
+- Real-time statistics and metrics
+- Interactive charts for downloads and usage
+- Global distribution analytics
+- Floating action buttons for quick actions
+
+### ✏️ SBS Studio Editor
+- Split-pane editor with live preview
+- Markdown and HTML support
+- Mobile device frame simulation
+- Real-time content rendering
+
+### 📚 Library Management
+- Hierarchical content organization
+- Volume → Book → Content structure
+- Pagination and search functionality
+- CRUD operations with modals
+
+### 👤 User Management
+- Role-based permissions
+- User status tracking
+- Clean table interface
+- Floating add button
+
+## 🎨 Design System
+
+### Color Palette
+- **Primary**: `#8b4513` (Saddle Brown)
+- **Secondary**: `#6b3410` (Dark Brown)
+- **Accent**: `#d2b48c` (Tan)
+- **Text**: `#3c2415` (Dark Brown)
+- **Background**: `#fafafa` (Light Gray)
+
+### Glassmorphism Classes
+```css
+.glass-card     /* Main content cards */
+.glass-panel    /* Secondary panels */
+.glass-button   /* Interactive elements */
+```
+
+## 🛠️ Development
+
+### Available Scripts
 ```bash
-ng generate --help
+npm start          # Development server
+npm run build      # Production build
+npm test           # Run unit tests
+npm run lint       # Code linting
+npm run e2e        # End-to-end tests
 ```
 
-## Building
+### Project Structure
+- **Standalone Components** - Modern Angular architecture
+- **Lazy Loading** - Optimized route-based code splitting
+- **Signal-based State** - Reactive state management
+- **Material Design 3** - Consistent UI components
 
-To build the project run:
+## 🐳 Docker Configuration
 
-```bash
-ng build
+Multi-stage build optimized for production:
+1. **Build Stage**: Node.js 18 Alpine with Angular CLI
+2. **Runtime Stage**: Nginx Alpine serving static files
+
+## 🔧 Configuration
+
+### Environment Variables
+```typescript
+// src/environments/environment.ts
+export const environment = {
+  production: false,
+  apiUrl: 'http://localhost:3000/api'
+};
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+### Material Theme
+Custom theme with brown color palette matching spiritual content branding.
 
-## Running unit tests
+## 📱 Mobile Responsiveness
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+- Responsive grid layouts
+- Mobile-optimized navigation
+- Touch-friendly interactions
+- Progressive Web App ready
 
-```bash
-ng test
-```
+## 🤝 Contributing
 
-## Running end-to-end tests
+1. Fork the repository
+2. Create feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit changes (`git commit -m 'Add amazing feature'`)
+4. Push to branch (`git push origin feature/amazing-feature`)
+5. Open Pull Request
 
-For end-to-end (e2e) testing, run:
+## 📄 License
 
-```bash
-ng e2e
-```
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+## 🙏 Acknowledgments
 
-## Additional Resources
+- Angular Team for the amazing framework
+- Material Design for the component library
+- Community contributors and spiritual content creators
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+---
+
+**Built with ❤️ for spiritual content management**
