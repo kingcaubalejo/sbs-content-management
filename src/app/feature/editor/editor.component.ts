@@ -83,7 +83,7 @@ console.log(example);
     html = html.replace(/^> (.+)/gim, '<blockquote>$1</blockquote>');
     
     // Lists
-    html = html.replace(/^\- (.+)/gim, '<li>$1</li>');
+    html = html.replace(/^- (.+)/gim, '<li>$1</li>');
     html = html.replace(/(<li.*<\/li>)/s, '<ul>$1</ul>');
     
     // Paragraphs

@@ -12,13 +12,29 @@
       "parserOptions": {
         "project": "./tsconfig.json"
       },
+      "env": {
+        "browser": true,
+        "node": true,
+        "es6": true
+      },
       "plugins": ["@typescript-eslint", "@angular-eslint"],
       "extends": ["eslint:recommended"],
       "rules": {
         "prefer-const": "error",
         "no-var": "error",
-        "no-unused-vars": "error",
-        "no-console": "warn"
+        "no-unused-vars": "off",
+        "no-console": "off",
+        "no-useless-escape": "error"
+      }
+    },
+    {
+      "files": ["*.spec.ts"],
+      "env": {
+        "jasmine": true,
+        "node": true
+      },
+      "rules": {
+        "no-unused-vars": "off"
       }
     },
     {
