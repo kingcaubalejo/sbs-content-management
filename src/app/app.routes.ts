@@ -40,5 +40,9 @@ export const routes: Routes = [
                 loadComponent: () => import('./feature/user/user.component').then(c => c.UserComponent),
             },
         ]
+    },
+    {
+        path: '**',
+        loadComponent: () => import('./core/page-not-found/page-not-found.component').then(c => c.PageNotFoundComponent)
     }
 ];
