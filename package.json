@@ -15,7 +15,7 @@
   "dependencies": {
     "@angular/animations": "^19.0.0",
     "@angular/cdk": "^19.2.19",
-    "@angular/common": "^19.0.0",
+    "@angular/common": "^19.2.16",
     "@angular/compiler": "^19.0.0",
     "@angular/core": "^19.0.0",
     "@angular/forms": "^19.0.0",
@@ -25,7 +25,13 @@
     "@angular/platform-server": "^19.0.0",
     "@angular/router": "^19.0.0",
     "@angular/ssr": "^19.0.2",
+    "@reduxjs/angular-redux": "^2.0.1",
+    "@reduxjs/toolkit": "^2.11.0",
+    "@types/d3": "^7.4.3",
+    "d3": "^7.9.0",
     "express": "^4.18.2",
+    "react-redux": "^9.2.0",
+    "redux": "^5.0.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.15.0"
